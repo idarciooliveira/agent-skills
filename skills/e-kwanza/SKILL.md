@@ -1,6 +1,14 @@
 ---
 name: ekwanza
-description: Integrate the É-kwanza (pay4all) payment API into a project — creating payment codes/QR tickets, checking ticket status, sending eMoney to customers (direct or via KWiK/IBAN), handling payment notification callbacks/webhooks (including HMAC-SHA256 x-signature validation), and Pagamento por Referência / Gateway de Pagamentos Online (GPO / Multicaixa Express) charges via AppyPay. Use this skill whenever the user mentions É-kwanza, e-kwanza, pay4all, KWiK payments, Multicaixa Express / GPO, or asks to build payment endpoints, wallet payouts, or webhook signature validation for the Angolan e-kwanza/AppyPay payment ecosystem — even if they just say "add e-kwanza payments" or "integrate this payment API" without naming every endpoint explicitly. Always consult this skill before writing any e-kwanza/pay4all client, controller, or signature-validation code, since the field order and hashing rules are easy to get wrong from memory.
+description: >-
+  Integrates the Angolan É-kwanza (pay4all) and AppyPay payment APIs: payment
+  tickets and QR codes, ticket status, wallet payouts (e-kwanza and KWiK/IBAN),
+  payment webhooks with HMAC-SHA256 x-signature validation, and
+  Referência/Multicaixa Express (GPO) charges. Use when the user mentions
+  É-kwanza, e-kwanza, pay4all, AppyPay, KWiK, Multicaixa Express, GPO,
+  Angolan payments, webhooks, wallet payouts, or payment integration. Consult
+  before writing e-kwanza/pay4all clients or signature code — field
+  concatenation order is spec-critical.
 ---
 
 # É-kwanza Payment Integration
