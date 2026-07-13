@@ -38,6 +38,7 @@ npx skills add . --skill ekwanza
 | Skill | Description | Install |
 |---|---|---|
 | `ekwanza` | Integrate É-kwanza / pay4all / AppyPay — payment tickets, QR codes, wallet payouts, KWiK/IBAN transfers, webhooks, and GPO/Multicaixa Express charges | `npx skills add idarciooliveira/agent-skills --skill ekwanza` |
+| `emis` | Integrate EMIS GPO — OAuth2, WebFrame card capture, Multicaixa Express, authorizations/captures/refunds, charges/QR, supervisors and terminals | `npx skills add idarciooliveira/agent-skills --skill emis` |
 
 ## Where skills are installed
 
@@ -80,9 +81,12 @@ agent-skills/
 ├── docs/
 │   └── adding-skills.md
 └── skills/
-    └── e-kwanza/
+    ├── e-kwanza/
+    │   ├── SKILL.md
+    │   ├── scripts/
+    │   └── references/
+    └── emis/
         ├── SKILL.md
-        ├── scripts/
         └── references/
 ```
 
