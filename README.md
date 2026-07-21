@@ -31,14 +31,16 @@ Before pushing to GitHub, install from a local clone:
 
 ```bash
 npx skills add . --skill ekwanza
+npx skills add . --skill payment-adapters
 ```
 
 ## Available skills
 
 | Skill | Description | Install |
 |---|---|---|
-| `ekwanza` | Integrate É-kwanza / pay4all / AppyPay — payment tickets, QR codes, wallet payouts, KWiK/IBAN transfers, webhooks, and GPO/Multicaixa Express charges | `npx skills add idarciooliveira/agent-skills --skill ekwanza` |
-| `emis` | Integrate EMIS GPO — OAuth2, WebFrame card capture, Multicaixa Express, authorizations/captures/refunds, charges/QR, supervisors and terminals | `npx skills add idarciooliveira/agent-skills --skill emis` |
+| `ekwanza` | Integrate É-kwanza / pay4all / AppyPay — tickets, QR, KWiK/IBAN, webhooks, GPO charges, plus production status-mapping lessons | `npx skills add idarciooliveira/agent-skills --skill ekwanza` |
+| `emis` | Integrate EMIS GPO — OAuth2/mTLS, WebFrame, Multicaixa Express, authorizations/captures/refunds, processor declines | `npx skills add idarciooliveira/agent-skills --skill emis` |
+| `payment-adapters` | Wallet orchestration — CashIn/Withdraw ports, Pending vs Rejected routing, reconciliation, dual-rail env, clearing/escrow glossary, cutover checklist | `npx skills add idarciooliveira/agent-skills --skill payment-adapters` |
 
 ## Where skills are installed
 
@@ -59,6 +61,8 @@ npx skills list
 
 Once installed, agents pick up skills automatically when the task matches the skill's description. You can also mention the skill explicitly in chat (e.g. "use the ekwanza skill to add payment webhooks").
 
+For wallet bugs (stuck Pending, UNKNOWN vs REJECTED, clearing seeds), prefer **`payment-adapters`** together with the relevant vendor skill (`emis` or `ekwanza`).
+
 ## Adding a new skill
 
 1. Create a folder at `skills/<skill-name>/` with a `SKILL.md` file.
@@ -71,6 +75,8 @@ Re-run the install command or use the update command to pull the latest version:
 
 ```bash
 npx skills update ekwanza
+npx skills update emis
+npx skills update payment-adapters
 ```
 
 ## Repository layout
@@ -81,13 +87,15 @@ agent-skills/
 ├── docs/
 │   └── adding-skills.md
 └── skills/
-    ├── e-kwanza/
+    ├── e-kwanza/          # install name: ekwanza
     │   ├── SKILL.md
     │   ├── scripts/
     │   └── references/
-    └── emis/
-        ├── SKILL.md
-        └── references/
+    ├── emis/
+    │   ├── SKILL.md
+    │   └── references/
+    └── payment-adapters/
+        └── SKILL.md
 ```
 
 New skills are added as sibling folders under `skills/`.
