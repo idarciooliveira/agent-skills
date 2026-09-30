@@ -41,6 +41,7 @@ npx skills add . --skill payment-adapters
 | `ekwanza` | Integrate É-kwanza / pay4all / AppyPay — tickets, QR, KWiK/IBAN, webhooks, GPO charges, plus production status-mapping lessons | `npx skills add idarciooliveira/agent-skills --skill ekwanza` |
 | `emis` | Integrate EMIS GPO — OAuth2/mTLS, WebFrame, Multicaixa Express, authorizations/captures/refunds, processor declines | `npx skills add idarciooliveira/agent-skills --skill emis` |
 | `payment-adapters` | Wallet orchestration — CashIn/Withdraw ports, Pending vs Rejected routing, reconciliation, dual-rail env, clearing/escrow glossary, cutover checklist | `npx skills add idarciooliveira/agent-skills --skill payment-adapters` |
+| `screen-capture` | Screenshots and screen recordings from WSL2 on a Windows host — PowerShell + ffmpeg gdigrab, frame extraction for visual verification | `npx skills add idarciooliveira/agent-skills --skill screen-capture` |
 
 ## Where skills are installed
 
@@ -94,8 +95,11 @@ agent-skills/
     ├── emis/
     │   ├── SKILL.md
     │   └── references/
-    └── payment-adapters/
-        └── SKILL.md
+    ├── payment-adapters/
+    │   └── SKILL.md
+    └── screen-capture/
+        ├── SKILL.md
+        └── scripts/
 ```
 
 New skills are added as sibling folders under `skills/`.
