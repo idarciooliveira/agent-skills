@@ -42,6 +42,7 @@ npx skills add . --skill payment-adapters
 | `emis` | Integrate EMIS GPO — OAuth2/mTLS, WebFrame, Multicaixa Express, authorizations/captures/refunds, processor declines | `npx skills add idarciooliveira/agent-skills --skill emis` |
 | `payment-adapters` | Wallet orchestration — CashIn/Withdraw ports, Pending vs Rejected routing, reconciliation, dual-rail env, clearing/escrow glossary, cutover checklist | `npx skills add idarciooliveira/agent-skills --skill payment-adapters` |
 | `publish-plan` | Upload an HTML plan to the Cloudflare R2 `plans` bucket with the `cf` CLI and share its public link | `npx skills add idarciooliveira/agent-skills --skill publish-plan` |
+| `simplify` | Clean up the changed code without changing behavior — 4 parallel cleanup agents review the diff for reuse, simplification, efficiency, and altitude, then apply the fixes (ported from Claude Code's built-in `/simplify`) | `npx skills add idarciooliveira/agent-skills --skill simplify` |
 | `screen-capture` | Screenshots and screen recordings from WSL2 on a Windows host — PowerShell + ffmpeg gdigrab, frame extraction for visual verification | `npx skills add idarciooliveira/agent-skills --skill screen-capture` |
 | `unslop` | Cut AI tells from writing — scans for common AI patterns and rewrites with a human voice | `npx skills add idarciooliveira/agent-skills --skill unslop` |
 
