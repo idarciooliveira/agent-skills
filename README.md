@@ -39,6 +39,7 @@ npx skills add . --skill payment-adapters
 | Skill | Description | Install |
 |---|---|---|
 | `ekwanza` | Integrate É-kwanza / pay4all / AppyPay — tickets, QR, KWiK/IBAN, webhooks, GPO charges, plus production status-mapping lessons | `npx skills add idarciooliveira/agent-skills --skill ekwanza` |
+| `eli5` | Explain any topic like I'm 5 — a dead-simple HTML artifact with big pictures and few words | `npx skills add idarciooliveira/agent-skills --skill eli5` |
 | `emis` | Integrate EMIS GPO — OAuth2/mTLS, WebFrame, Multicaixa Express, authorizations/captures/refunds, processor declines | `npx skills add idarciooliveira/agent-skills --skill emis` |
 | `payment-adapters` | Wallet orchestration — CashIn/Withdraw ports, Pending vs Rejected routing, reconciliation, dual-rail env, clearing/escrow glossary, cutover checklist | `npx skills add idarciooliveira/agent-skills --skill payment-adapters` |
 | `publish-plan` | Upload an HTML plan to the Cloudflare R2 `plans` bucket with the `cf` CLI and share its public link | `npx skills add idarciooliveira/agent-skills --skill publish-plan` |
