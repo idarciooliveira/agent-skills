@@ -38,6 +38,7 @@ npx skills add . --skill payment-adapters
 
 | Skill | Description | Install |
 |---|---|---|
+| `council` | Convene three delegate models (Claude Opus 5.5 Medium, Kimi K3.1, Google Argon) for parallel review or feedback — collect scores, summarize findings and disagreements, iterate until satisfied, and record results in the PR description | `npx skills add idarciooliveira/agent-skills --skill council` |
 | `ekwanza` | Integrate É-kwanza / pay4all / AppyPay — tickets, QR, KWiK/IBAN, webhooks, GPO charges, plus production status-mapping lessons | `npx skills add idarciooliveira/agent-skills --skill ekwanza` |
 | `eli5` | Explain any topic like I'm 5 — a dead-simple HTML artifact with big pictures and few words | `npx skills add idarciooliveira/agent-skills --skill eli5` |
 | `emis` | Integrate EMIS GPO — OAuth2/mTLS, WebFrame, Multicaixa Express, authorizations/captures/refunds, processor declines | `npx skills add idarciooliveira/agent-skills --skill emis` |
