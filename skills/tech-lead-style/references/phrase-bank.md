@@ -1,0 +1,57 @@
+# Phrase bank
+
+Keep the structure and swap the content.
+
+- **Framing:**
+  - "O X é …"
+  - "X passa a …"
+  - "Esta página mostra o quê e porquê. A fonte técnica é o repositório (pasta docs)."
+  - "Esta página diz qual usar e quando."
+  - "Não é um X."
+  - "Não é, no arranque, X."
+- **Uncertainty:**
+  - "As restantes datas são propostas e dependem de X."
+  - "Os nomes marcados como *a definir* dependem de X. Esta página é atualizada quando Y."
+  - "Os valores partem de X; Y vai ser medido antes de qualquer reserva definitiva."
+  - "Desenhado, não construído. Construído quando X o exigir."
+  - "Não confirmado pelo X."
+  - "Rascunho para discussão: são propostas, ainda por acordar."
+- **Rules:**
+  - "Sem X comprovada, não há Y."
+  - "Não são aceites X sem Y."
+  - "X nunca Y."
+  - "Tudo é um pull request."
+  - "X só depois de Y."
+  - "Um ticket só sobe quando o nível abaixo já verificou a sua parte."
+  - "X é uma alteração de configuração, não um projeto."
+- **Decisions:**
+  - "Aprovar X (âmbito com números)."
+  - "Mandatar X para Y até <data>."
+  - "Escolher X (ou delegar a escolha no Y até <data>)."
+  - "O maior risco de prazo é X (risco R-07)."
+  - "Sem custo adicional. O histórico perde-se."
+  - "Risco aceite: X."
+- **Ownership:**
+  - "X tem de aceitar este ponto."
+  - "A redação é da responsabilidade do X."
+  - "Os custos são apurados pela X."
+  - "O X é do Y: a configuração é deles, e aqui fica o registo do que foi feito."
+  - "Escalar ao X antes de Y."
+  - "Avisar X antes de Y."
+- **Progress:**
+  - "Já temos X. Falta Y."
+  - "Contagem: n existem, n parciais, n faltam."
+  - "Datas das fases mantidas."
+  - "X já corre em produção, antes do fim previsto da fase N."
+  - "**Critérios de saída:** X validados; Y aprovadas; Z fechadas."
+  - "**Objetivo:** N ou menos, a partir do momento em que X."
+  - "Mais tarde: X."
+- **Pointers:**
+  - "Detalhe em <Página>."
+  - "Os X vivem no repositório, em inglês, e só mudam por pull request."
+  - "Não copiar o conteúdo para aqui: a cópia desatualiza."
+  - "X novo: copiar `_template.md` e só escrever passos que já correram."
+  - "Os identificadores coincidem com a documentação técnica. Não os renumerar."
+- **Plain language:**
+  - "Sinal que a plataforma emite continuamente. Se deixar de chegar, uma máquina separada dá o alarme. Serve para detetar que o próprio sistema de alertas parou."
+  - "Três nós permitem perder um sem parar o serviço."

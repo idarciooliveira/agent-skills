@@ -48,6 +48,7 @@ npx skills add . --skill payment-adapters
 | `publish-plan` | Upload an HTML plan to the Cloudflare R2 `plans` bucket with the `cf` CLI and share its public link | `npx skills add idarciooliveira/agent-skills --skill publish-plan` |
 | `simplify` | Clean up the changed code without changing behavior — 4 parallel cleanup agents review the diff for reuse, simplification, efficiency, and altitude, then apply the fixes (ported from Claude Code's built-in `/simplify`) | `npx skills add idarciooliveira/agent-skills --skill simplify` |
 | `screen-capture` | Screenshots and screen recordings from WSL2 on a Windows host — PowerShell + ffmpeg gdigrab, frame extraction for visual verification | `npx skills add idarciooliveira/agent-skills --skill screen-capture` |
+| `tech-lead-style` | Write pt-AO business docs (Confluence pages, proposals, decision memos, risk registers, checklists) in a terse Tech Lead style — short sentences with numbers, tables first, named owners, labelled unknowns | `npx skills add idarciooliveira/agent-skills --skill tech-lead-style` |
 | `unslop` | Cut AI tells from writing — scans for common AI patterns and rewrites with a human voice | `npx skills add idarciooliveira/agent-skills --skill unslop` |
 
 ## Where skills are installed
@@ -107,6 +108,9 @@ agent-skills/
     ├── screen-capture/
     │   ├── SKILL.md
     │   └── scripts/
+    ├── tech-lead-style/
+    │   ├── SKILL.md
+    │   └── references/
     └── unslop/
         └── SKILL.md
 ```
