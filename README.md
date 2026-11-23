@@ -38,6 +38,7 @@ npx skills add . --skill payment-adapters
 
 | Skill | Description | Install |
 |---|---|---|
+| `architect` | Sketch types, signatures and module structure before code — trace what the change touches, compare two shapes, pick the one with one owner per piece of state (ported from pstack) | `npx skills add idarciooliveira/agent-skills --skill architect` |
 | `council` | Convene three delegate models (Claude Opus 5.5 Medium, Kimi K3.1, Google Argon) for parallel review or feedback — collect scores, summarize findings and disagreements, iterate until satisfied, and record results in the PR description | `npx skills add idarciooliveira/agent-skills --skill council` |
 | `ekwanza` | Integrate É-kwanza / pay4all / AppyPay — tickets, QR, KWiK/IBAN, webhooks, GPO charges, plus production status-mapping lessons | `npx skills add idarciooliveira/agent-skills --skill ekwanza` |
 | `eli5` | Explain any topic like I'm 5 — a dead-simple HTML artifact with big pictures and few words | `npx skills add idarciooliveira/agent-skills --skill eli5` |
@@ -47,9 +48,11 @@ npx skills add . --skill payment-adapters
 | `no-comments` | Delete code comments that don't earn their place — parallel reviewers with a bundled brief, audit of kills and keeps, fixes for named workarounds, and offers to encode `do not remove` constraints as types, tests or lint | `npx skills add idarciooliveira/agent-skills --skill no-comments` |
 | `payment-adapters` | Wallet orchestration — CashIn/Withdraw ports, Pending vs Rejected routing, reconciliation, dual-rail env, clearing/escrow glossary, cutover checklist | `npx skills add idarciooliveira/agent-skills --skill payment-adapters` |
 | `publish-plan` | Upload an HTML plan to the Cloudflare R2 `plans` bucket with the `cf` CLI and share its public link | `npx skills add idarciooliveira/agent-skills --skill publish-plan` |
+| `principle-fix-root-causes` | Debugging principle — trace each symptom to the first place the system went wrong and fix it there; a guard is a fix only when the state it handles is legitimate (ported from pstack) | `npx skills add idarciooliveira/agent-skills --skill principle-fix-root-causes` |
 | `simplify` | Clean up the changed code without changing behavior — 4 parallel cleanup agents review the diff for reuse, simplification, efficiency, and altitude, then apply the fixes (ported from Claude Code's built-in `/simplify`) | `npx skills add idarciooliveira/agent-skills --skill simplify` |
 | `screen-capture` | Screenshots and screen recordings from WSL2 on a Windows host — PowerShell + ffmpeg gdigrab, frame extraction for visual verification | `npx skills add idarciooliveira/agent-skills --skill screen-capture` |
 | `tech-lead-style` | Write pt-AO business docs (Confluence pages, proposals, decision memos, risk registers, checklists) in a terse Tech Lead style — short sentences with numbers, tables first, named owners, labelled unknowns | `npx skills add idarciooliveira/agent-skills --skill tech-lead-style` |
+| `why` | Answer "why does X work this way" from the record — commits and PR discussions, cited, with inferences labeled (ported from pstack) | `npx skills add idarciooliveira/agent-skills --skill why` |
 | `unslop` | Cut AI tells from writing — scans for common AI patterns and rewrites with a human voice | `npx skills add idarciooliveira/agent-skills --skill unslop` |
 
 ## Where skills are installed
@@ -123,3 +126,7 @@ New skills are added as sibling folders under `skills/`.
 There is no separate publish step. Push this repo to GitHub and share the install command. After people install from it, the repo can appear on [skills.sh](https://skills.sh) automatically.
 
 Repository: https://github.com/idarciooliveira/agent-skills
+
+## Attribution
+
+`architect`, `why` and `principle-fix-root-causes` are ported from [cursor/plugins pstack](https://github.com/cursor/plugins/tree/main/pstack) (MIT, Copyright (c) 2026 Lauren Tan). `no-comments` is adapted from the same plugin. The license text is in [licenses/pstack-MIT.txt](licenses/pstack-MIT.txt).
