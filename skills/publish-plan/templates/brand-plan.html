@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>Feature flags per team</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* Brand style: purple #AB00FF, Inter, near-black #110700, pills. */
+  :root { color-scheme: light;
+    --ink:#110700; --muted:#6b6270; --line:rgba(17,7,0,.12); --bg:#ffffff; --soft:#faf6fd;
+    --purple:#ab00ff; --purple-d:#8a00cc; --magenta:#ff1cd0; --orange:#ffa050;
+    --grad:linear-gradient(90deg,var(--purple),var(--magenta) 55%,var(--orange));
+    --ok-bg:#e4f5ea; --ok:#17703f; --no-bg:#efedf0; --no:#5d5662; --wait-bg:#fff2d4; --wait:#8a5a00; }
+  * { box-sizing:border-box; }
+  html,body { margin:0; }
+  body { background:var(--bg); color:var(--ink); font-family:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+    font-size:15px; line-height:1.55; -webkit-font-smoothing:antialiased; }
+  .bar { height:6px; background:var(--grad); }
+  main { max-width:960px; margin:0 auto; padding:32px 16px 48px; }
+  code { font-family:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace; font-size:.86em;
+    background:var(--soft); border:1px solid var(--line); border-radius:6px; padding:1px 5px; overflow-wrap:anywhere; }
+  .eyebrow { font-size:12px; font-weight:600; letter-spacing:.12em; color:var(--muted); text-transform:uppercase; }
+  h1 { font-size:30px; line-height:1.15; letter-spacing:-.02em; margin:6px 0 12px; font-weight:700; }
+  h2 { font-size:18px; margin:36px 0 12px; font-weight:700; letter-spacing:-.01em; }
+  h3 { font-size:14px; margin:0 0 8px; font-weight:700; }
+  a { color:var(--purple-d); text-decoration:none; border-bottom:1px solid rgba(171,0,255,.3); }
+  a:hover { border-bottom-color:var(--purple); }
+  .meta { display:flex; flex-wrap:wrap; gap:8px 16px; align-items:center; color:var(--muted); font-size:13px; }
+  .loz { display:inline-block; font-size:11px; font-weight:700; letter-spacing:.06em; padding:3px 10px; border-radius:999px; }
+  .loz.wait { background:var(--wait-bg); color:var(--wait); }
+  .loz.ok { background:var(--ok-bg); color:var(--ok); }
+  .loz.no { background:var(--no-bg); color:var(--no); }
+  .kicker { margin:18px 0 0; font-size:17px; }
+  .compare { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:20px; }
+  .compare > div { border:1px solid var(--line); border-radius:20px; padding:16px 18px; min-width:0; }
+  .compare .new { background:var(--soft); border-color:rgba(171,0,255,.35); }
+  .compare p { margin:0; }
+
+  /* Diagram */
+  .flow { display:grid; grid-template-columns:minmax(0,1.05fr) 64px minmax(0,1fr); align-items:stretch; margin-top:8px; }
+  .col-h { font-size:11px; font-weight:700; letter-spacing:.1em; color:var(--muted); text-transform:uppercase; margin:0 0 8px; }
+  .col-h code { text-transform:none; letter-spacing:0; }
+  .teams { display:grid; gap:10px; }
+  .team { border:1px solid var(--line); border-radius:18px; padding:12px 14px; display:grid;
+    grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr); gap:10px; align-items:center; background:#fff; }
+  .team b { display:block; font-size:15px; }
+  .team small { color:var(--muted); font-size:12px; }
+  .chips { display:grid; gap:6px; }
+  .chip { display:flex; justify-content:space-between; gap:8px; align-items:center; border-radius:999px;
+    padding:4px 4px 4px 12px; font-size:12px; border:1px solid var(--line); background:#fff; }
+  .chip code { background:none; border:0; padding:0; font-size:11.5px; }
+  .chip span { border-radius:999px; padding:2px 9px; font-weight:600; font-size:11px; white-space:nowrap; }
+  .chip.v span { background:var(--no-bg); color:var(--no); }
+  .chip.e span { background:var(--ink); color:#fff; }
+  .arrow { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; }
+  .arrow i { display:block; width:2px; flex:1; background:var(--grad); border-radius:2px; max-height:140px; }
+  .arrow em { font-style:normal; font-size:10.5px; font-weight:600; color:var(--muted); writing-mode:vertical-rl; transform:rotate(180deg); letter-spacing:.08em; }
+  .arrow .tip { width:0; height:0; border-left:7px solid transparent; border-right:7px solid transparent; border-top:9px solid var(--orange); transform:rotate(-90deg); }
+  .org { border-radius:22px; padding:2px; background:var(--grad); }
+  .org > div { background:#fff; border-radius:20px; padding:16px; height:100%; }
+  .org .title { display:flex; justify-content:space-between; align-items:baseline; gap:8px; flex-wrap:wrap; }
+  .org .title b { font-size:17px; }
+  .org .title small { color:var(--muted); font-size:12px; }
+  .ds { display:flex; flex-wrap:wrap; gap:6px; margin:10px 0 4px; }
+  .ds span { background:var(--soft); border:1px solid rgba(171,0,255,.25); border-radius:999px; padding:3px 12px; font-size:12px; font-weight:600; }
+  .note { color:var(--muted); font-size:12px; margin:4px 0 0; }
+  .folders { display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-top:6px; }
+  .folder { border:1px solid var(--line); border-radius:10px; padding:6px 10px; font-size:13px; font-weight:600;
+    position:relative; background:#fff; min-width:0; }
+  .folder::before { content:""; position:absolute; top:-1px; left:10px; width:22px; height:3px; border-radius:0 0 3px 3px; background:var(--purple); }
+  .folder.t::before { background:var(--orange); }
+  .sec { margin-top:14px; }
+  .staff { margin-top:12px; border:1px dashed var(--line); border-radius:14px; padding:10px 14px; font-size:12.5px; color:var(--muted); }
+
+  table { width:100%; border-collapse:collapse; font-size:14px; }
+  th { text-align:left; font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); font-weight:700;
+    padding:8px 10px; border-bottom:1px solid var(--line); }
+  td { padding:10px; border-bottom:1px solid var(--line); vertical-align:top; }
+  td:first-child { font-weight:600; }
+  .tbl { border:1px solid var(--line); border-radius:18px; overflow:hidden; overflow-x:auto; }
+  .tbl table tr:last-child td { border-bottom:0; }
+  .why { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .why > div { border:1px solid var(--line); border-radius:20px; padding:16px 18px; min-width:0; }
+  .why ul { margin:0; padding-left:18px; }
+  .why li { margin:0 0 8px; }
+  .why li:last-child { margin:0; }
+  .links { columns:2; column-gap:24px; padding-left:18px; margin:0; }
+  .links li { margin:0 0 6px; break-inside:avoid; }
+  .links small { color:var(--muted); }
+  footer { margin-top:36px; padding-top:16px; border-top:1px solid var(--line); color:var(--muted); font-size:13px; }
+
+  @media (max-width:720px) {
+    h1 { font-size:24px; }
+    .compare, .why, .folders { grid-template-columns:1fr; }
+    .flow { grid-template-columns:minmax(0,1fr); }
+    .arrow { flex-direction:row; height:44px; }
+    .arrow i { width:auto; height:2px; flex:1; max-height:none; max-width:80px; }
+    .arrow em { writing-mode:horizontal-tb; transform:none; }
+    .arrow .tip { transform:none; }
+    .team { grid-template-columns:minmax(0,1fr); }
+    .links { columns:1; }
+    .tbl table.roles { min-width:600px; }
+  }
+</style>
+</head>
+<body>
+<div class="bar"></div>
+<main>
+  <div class="eyebrow">Example project · Feature flags · Production</div>
+  <h1>Feature flags per team</h1>
+  <div class="meta">
+    <span class="loz wait">PROPOSED</span>
+    <span>For review: Tech Lead</span>
+    <span>Last review: 01/01/2026</span>
+  </div>
+  <p class="kicker"><b>Goal:</b> each team owns its flags. Only editors can change them in production.</p>
+
+  <div class="compare">
+    <div><h3>Today</h3><p>One shared group for everyone: <code>flags-viewers</code> and <code>flags-editors</code>.</p></div>
+    <div class="new"><h3>With the proposal</h3><p>2 teams × 2 groups = 4 groups. One project, with a folder per team.</p></div>
+  </div>
+
+  <h2>How it is organised</h2>
+  <div class="flow">
+    <div>
+      <p class="col-h">Team → group <code>&lt;team&gt;-…</code></p>
+      <div class="teams">
+        <div class="team"><div><b>Web</b><small>Frontend · <code>web</code></small></div>
+          <div class="chips"><div class="chip v"><code>web-viewers</code><span>Viewer</span></div><div class="chip e"><code>web-editors</code><span>Editor</span></div></div></div>
+        <div class="team"><div><b>Mobile</b><small>Apps · <code>mobile</code></small></div>
+          <div class="chips"><div class="chip v"><code>mobile-viewers</code><span>Viewer</span></div><div class="chip e"><code>mobile-editors</code><span>Editor</span></div></div></div>
+      </div>
+    </div>
+    <div class="arrow"><i></i><em>mapping</em><span class="tip"></span></div>
+    <div>
+      <p class="col-h">Flag service</p>
+      <div class="org"><div>
+        <div class="title"><b>Project <code>example</code></b><small>created from code</small></div>
+        <div class="ds"><span>Staging</span><span>Production</span></div>
+        <p class="note">Environments are fixed per project.</p>
+        <div class="sec">
+          <p class="col-h">Team folders</p>
+          <div class="folders"><div class="folder">Web</div><div class="folder t">Mobile</div></div>
+        </div>
+        <div class="staff">Admin group unchanged: <code>platform-admins</code> keeps full access.</div>
+      </div></div>
+    </div>
+  </div>
+
+  <h2>Who can do what</h2>
+  <div class="tbl"><table class="roles">
+    <tr><th>Group</th><th>Role</th><th>See flags</th><th>Change in staging</th><th>Change in production</th></tr>
+    <tr><td><code>&lt;team&gt;-viewers</code></td><td>Viewer</td><td><span class="loz ok">YES</span></td><td><span class="loz no">NO</span></td><td><span class="loz no">NO</span></td></tr>
+    <tr><td><code>&lt;team&gt;-editors</code></td><td>Editor</td><td><span class="loz ok">YES</span></td><td><span class="loz ok">YES</span></td><td><span class="loz ok">YES</span></td></tr>
+  </table></div>
+  <p class="note">One group per person per team. With several groups, the highest role wins.</p>
+
+  <h2>Open questions</h2>
+  <div class="tbl"><table>
+    <tr><th>#</th><th>Question</th><th>Current proposal</th></tr>
+    <tr><td>Q1</td><td>Do viewers need staging edits?</td><td>No. Editors only.</td></tr>
+    <tr><td>Q2</td><td>Does any team need its own project?</td><td>Only if one team must not see another's flags.</td></tr>
+  </table></div>
+
+  <h2>Trade-offs and why</h2>
+  <div class="why">
+    <div><h3>Why</h3><ul>
+      <li>One project: both teams ship the same app. Separate projects would duplicate every shared flag.</li>
+      <li>Groups in the identity provider, mapping in code: one place to add a person.</li>
+    </ul></div>
+    <div><h3>Trade-offs</h3><ul>
+      <li>Every team sees every folder.</li>
+      <li>Per-folder permissions need the paid plan.</li>
+    </ul></div>
+  </div>
+
+  <h2>References</h2>
+  <ul class="links">
+    <li><a href="https://example.com/docs/roles">Roles and permissions</a> <small>· vendor docs</small></li>
+    <li><a href="https://example.com/docs/projects">Projects and environments</a> <small>· vendor docs</small></li>
+  </ul>
+
+  <footer>Technical detail: <code>infra/flags/main.tf</code> in the <code>example</code> repository.</footer>
+</main>
+</body>
+</html>
